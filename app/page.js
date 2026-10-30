@@ -1,69 +1,150 @@
-import Image from "next/image";
 
-export default function Home() {
+import Image from "next/image";
+import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
+const cars = [
+  {
+    id: "1",
+    name: "Toyota Corolla",
+    type: "Sedan",
+    transmission: "Automatic",
+    seats: 5,
+    price: 1800,
+    image: "/images/cars/sedan.jpg",
+  },
+  {
+    id: "2",
+    name: "Toyota RAV4",
+    type: "SUV",
+    transmission: "Automatic",
+    seats: 5,
+    price: 2500,
+    image: "/images/cars/suv.jpg",
+  },
+  {
+    id: "3",
+    name: "Hyundai Accent",
+    type: "Compact",
+    transmission: "Manual",
+    seats: 5,
+    price: 1500,
+    image: "/images/cars/compact.jpg",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
+    <main className="sw-home">
+      <section className="sw-hero">
+        <div className="sw-hero-image">
+          <Image
+            src="/images/cars/home.jpg"
+            alt="Car available to rent through Sheggar Wheels"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 65vw"
+          />
+        </div>
+
+        <div className="sw-hero-gradient" />
+
+        <div className="sw-hero-content">
+          <p className="sw-eyebrow">YOUR JOURNEY, YOUR WAY</p>
+
+          <h1>
+            RENT THE BEST
+            <br />
+            CAR FROM US
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <Link href="/cars" className="sw-hero-button">
+            Explore available cars <span aria-hidden="true">→</span>
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <form action="/cars" method="GET" className="sw-search">
+          <label className="sw-search-field">
+            <span className="sw-field-content">
+              <span className="sw-field-label">Location</span>
+              <select name="location" defaultValue="Addis Ababa">
+                <option value="Addis Ababa">Addis Ababa</option>
+                <option value="Bole">Bole</option>
+                <option value="Piazza">Piazza</option>
+                <option value="Kazanchis">Kazanchis</option>
+                <option value="Arada">Arada</option>
+              </select>
+            </span>
+          </label>
+          <label className="sw-search-field">
+            <span className="sw-field-content">
+              <span className="sw-field-label">Car Type</span>
+              <select name="type" defaultValue="">
+                <option value=""> Type</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Compact">Compact</option>
+                <option value="Luxury">Luxury</option>
+              </select>
+            </span>
+          </label>
+          <label className="sw-search-field">
+            <span className="sw-field-content">
+              <span className="sw-field-label">Price Range</span>
+              <select name="price" defaultValue="">
+                <option value=""> Price</option>
+                <option value="1500">Up to 1,500 ETB/day</option>
+                <option value="2000">Up to 2,000 ETB/day</option>
+                <option value="3000">Up to 3,000 ETB/day</option>
+              </select>
+            </span>
+          </label>
+          <button type="submit" className="sw-search-button">
+            <span aria-hidden="true">⌕</span> Search Cars
+          </button>
+        </form>
+      </section>
+      <section className="sw-featured">
+        <div className="sw-section-heading">
+          <div>
+            <p className="sw-section-eyebrow">FIND YOUR NEXT RIDE</p>
+            <h2>Featured vehicles</h2>
+            <p className="sw-section-description">
+              Explore cars available for rent around Addis Ababa.
+            </p>
+          </div>
+
+          <Link href="/cars" className="sw-view-all">
+            View all cars <span aria-hidden="true">→</span>
+          </Link>
         </div>
-      </main>
-    </div>
+        <div className="sw-car-grid">
+          {cars.map((car) => (
+            <article className="sw-car-card" key={car.id}>
+              <Link
+                href={`/cars/${car.id}`}
+                className="sw-car-image"
+                aria-label={`View ${car.name}`}
+              >
+                <Image
+                  src={car.image}
+                  alt={car.name}
+                  fill
+                  sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 33vw"
+                />
+              </Link>
+              <div className="sw-car-info">
+                <div>
+                  <h3>{car.name}</h3>
+                  <p>
+                    {car.type} · {car.transmission} · {car.seats} Seats
+                  </p>
+                </div>
+                <p className="sw-car-price">
+                  {car.price.toLocaleString()} <span>ETB/day</span>
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }
